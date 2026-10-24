@@ -64,15 +64,14 @@
 // Overrides for the input listener node
 &trackball_listener {
     status = "okay";
-    input-processors =<&mouse_runtime_input_processor>,
-        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;         //Y軸反転
+    input-processors = <&mouse_runtime_input_processor>,
+        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
         //<&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;       //X軸反転
-        //<&zip_temp_layer 2 1000>;                            //オートマウスレイヤーの選択;
-
+        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
+        <&zip_temp_layer 4 10000>;                          //オートマウスレイヤー (MOUSE) を10秒間有効化
 
     scroller {
-        layers = <3>;
+        layers = <5>;
         input-processors = 
             // <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
             // <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
@@ -100,4 +99,12 @@
 &scroll_runtime_input_processor {
     scale-multiplier = <1>;
     scale-divisor = <8>;
+};
+
+// オートマウスレイヤー。直前200ms以内にキー入力があれば発動しない。
+// excluded-positions のキーを押してもレイヤーは解除されない。
+// 16-19: MB1/MB3/MB2/SCROLL(hold)  26-27: MB4/MB5  34: 親指Shift
+&zip_temp_layer {
+    require-prior-idle-ms = <200>;
+    excluded-positions = <16 17 18 19 26 27 34>;
 };
