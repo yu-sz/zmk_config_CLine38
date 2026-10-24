@@ -10,7 +10,7 @@ on:
 
 jobs:
   draw:
-    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@f9cf9d3677368a7fb1dc505c51b8156fafa66fe2
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@e855a57cf6f5851b8235b56a69d46fa0646b26e8 # main 2026-08-11
     permissions:
       contents: write
     with:
